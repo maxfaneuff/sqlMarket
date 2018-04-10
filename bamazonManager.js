@@ -1,3 +1,7 @@
+//bugs//
+//make Products for Sale into a Table//
+//Add to Inventory needs to add to previous inventory, not set a new number//
+
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 

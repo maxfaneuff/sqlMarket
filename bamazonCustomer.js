@@ -1,3 +1,6 @@
+//bugs//
+//formatting the data in a nice-looking table//
+
 //require shiz//
 var mysql = require("mysql");
 var inquirer = require("inquirer");
@@ -38,8 +41,8 @@ function begin() {
           res[i].item_id
       );
     }
+    welcome();
   });
-  welcome();
 }
 
 //Beginning inquirer prompt//
@@ -68,7 +71,7 @@ function welcome() {
 //function to check inventory against requested items//
 function fulfillOrder(answers) {
   connection.query(
-    "SELECT stock_quantity, price, product_name FROM products WHERE item_id=?",
+    "SELECT stock_quantity, price, product_name, product_sales FROM products WHERE item_id=?",
     [answers.select],
     function(err, res) {
       if (err) throw err;
@@ -78,6 +81,14 @@ function fulfillOrder(answers) {
         var item = res[i].product_name;
         var stockQuantity = parseInt(res[i].stock_quantity);
         var quantityRequest = parseInt(answers.howmuch);
+        var pastSales;
+        if (res[i].product_sales != null) {
+          pastSales = parseInt(res[i].product_sales);
+        } else {
+          pastSales = 0;
+        }
+
+        var newSales = price * quantityRequest + pastSales;
 
         if (stockQuantity < quantityRequest) {
           console.log(
@@ -87,14 +98,15 @@ function fulfillOrder(answers) {
         } else if (stockQuantity >= quantityRequest) {
           var remainingQuantity = stockQuantity - quantityRequest;
           updateInventory(remainingQuantity, item);
-          console.log("Ok!  Your total comes to:  " + quantityRequest * price);
+          updateSales(newSales, item);
+          console.log("Ok!  Your total comes to:  $" + quantityRequest * price);
         }
       }
     }
   );
 }
 
-function updateInventory(quantity, product) {
+function updateInventory(quantity, product, totalSales) {
   connection.query(
     "UPDATE products SET ? WHERE ?",
     [
@@ -107,9 +119,25 @@ function updateInventory(quantity, product) {
     ],
     function(err, res) {
       if (err) throw err;
-
       console.log("Thank you for your order!");
-      connection.end();
     }
   );
+}
+
+function updateSales(newSales, item) {
+  connection.query(
+    "UPDATE products SET ? WHERE ?",
+    [
+      {
+        product_sales: newSales
+      },
+      {
+        product_name: item
+      }
+    ],
+    function(err, res) {
+      if (err) throw err;
+    }
+  );
+  connection.end();
 }
