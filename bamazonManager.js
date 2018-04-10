@@ -45,6 +45,8 @@ function hello() {
         readLowInventory();
       } else if (answers.hello === "Add to Inventory") {
         updateInventory();
+      } else if (answers.hello === "Add New Product") {
+        createProduct();
       }
     });
 }
@@ -134,4 +136,52 @@ function updateInventory() {
       });
   });
   //where do I put the goodbye function?//
+}
+
+function createProduct() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "product",
+        message: "What product would you like to add?"
+      },
+      {
+        type: "input",
+        name: "quantity",
+        message: "How much of this product should we stock?"
+      },
+      {
+        type: "input",
+        name: "price",
+        message: "How much should we charge for this item?"
+      },
+      {
+        type: "input",
+        name: "department",
+        message: "Which department should this product fall under?"
+      }
+    ])
+    .then(answers => {
+      connection.query(
+        "INSERT INTO products SET ?",
+        {
+          product_name: answers.product,
+          stock_quantity: answers.quantity,
+          price: answers.price,
+          department_name: answers.department
+        },
+        function(err, res) {
+          if (err) throw err;
+
+          console.log(
+            "You got it!  We'll start selling " +
+              answers.product +
+              " at a price of $" +
+              answers.price +
+              " per unit.  Thank you!"
+          );
+        }
+      );
+    });
 }
