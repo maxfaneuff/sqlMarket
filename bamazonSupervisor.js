@@ -22,6 +22,11 @@ connection.connect(function(err) {
   hello();
 });
 
+function goodbye() {
+  console.log("Goodbye!");
+  connection.end();
+}
+
 function hello() {
   inquirer
     .prompt([
@@ -43,11 +48,10 @@ function hello() {
 
 function viewDepartment() {
   connection.query(
-    "SELECT departments.department_id, departments.department_name, departments.over_head_costs, products.product_sales, products.department_name FROM departments LEFT JOIN products ON departments.department_name = products.department_name GROUP BY departments.department_id",
+    "SELECT departments.department_id, departments.department_name, departments.over_head_costs, products.product_sales" +
+      " FROM departments LEFT JOIN products ON departments.department_id = products.item_id GROUP BY departments.department_id",
     function(err, res) {
       if (err) throw err;
-
-      console.log(res);
 
       for (var i = 0; i < res.length; i++) {
         let config, data, output;
@@ -101,6 +105,7 @@ function viewDepartment() {
         output = table(data, config);
         console.log(output);
       }
+      goodbye();
     }
   );
 }
@@ -130,6 +135,7 @@ function createDepartment() {
           if (err) throw err;
 
           console.log("Ok!  New department added");
+          goodbye();
         }
       );
     });

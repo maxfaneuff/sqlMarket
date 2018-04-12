@@ -23,6 +23,11 @@ connection.connect(function(err) {
   begin();
 });
 
+function goodbye() {
+  console.log("Goodbye!");
+  connection.end();
+}
+
 //Reads data from products table.//
 //Need to figure out how to make table look pretty.//
 function begin() {
