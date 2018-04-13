@@ -6,7 +6,9 @@
 
 ##### Bamazon Customer is the first & simplest of the Bamazon.js pages. When loaded w/ Node, BamazonCustomer shows the user a list of all the items for sale, their price, and their product ID number, which increments automatically ![customer onload](https://raw.githubusercontent.com/maxfaneuff/sqlMarket/master/images/customer%20onload.png).
 
-##### Users are then prompted to enter the ID number of the item they wish to purchase, and then the quantity of how many of that item they wish to purchase. The app tallies up the total, presents the user w/ a checkout statement, and subtracts the requested quantity from our stock_quantity ![customer purchase](https://raw.githubusercontent.com/maxfaneuff/sqlMarket/master/images/customer%20purchase.png). If a user tries to purchase an item at a quantity beyond what we have in stock, an error message is displayed ![customer toomany](https://raw.githubusercontent.com/maxfaneuff/sqlMarket/master/images/customer%20toomany.png). In either case, the app exits after the transaction.
+##### Users are then prompted to enter the ID number of the item they wish to purchase, and then the quantity of how many of that item they wish to purchase. The app tallies up the total, presents the user w/ a checkout statement, and subtracts the requested quantity from our stock_quantity ![customer purchase](https://raw.githubusercontent.com/maxfaneuff/sqlMarket/master/images/customer%20purchase.png).
+
+##### If a user tries to purchase an item at a quantity beyond what we have in stock, an error message is displayed ![customer toomany](https://raw.githubusercontent.com/maxfaneuff/sqlMarket/master/images/customer%20toomany.png). In either case, the app exits after the transaction.
 
 ## **bamazonManager**
 
@@ -16,7 +18,9 @@
 
 ##### Selecting "View Low Inventory" will show the user all the items that have fewer than 5 in stock. If no items are below 5 in stock, than no message is displayed. The item's name, ID, and current quantity is displayed. The app then quits ![manager lowstock](https://raw.githubusercontent.com/maxfaneuff/sqlMarket/master/images/manager%20lowstock.png).
 
-##### Selecting "Add to Inventory" allows the manager to set a new inventory for a low item. When selected, the app asks the manager which item to increase the quantity of, and what that new quantity should be ![manager morestock](https://raw.githubusercontent.com/maxfaneuff/sqlMarket/master/images/manager%20morestock.png). When completed, a success message is displayed, telling the manager that the quantity of the desired item has been increased. The app then quits ![manager morestock2](<https://raw.githubusercontent.com/maxfaneuff/sqlMarket/master/images/manager%20morestock%20(2).png>).
+##### Selecting "Add to Inventory" allows the manager to set a new inventory for a low item. When selected, the app asks the manager which item to increase the quantity of, and what that new quantity should be ![manager morestock](https://raw.githubusercontent.com/maxfaneuff/sqlMarket/master/images/manager%20morestock.png).
+
+##### When completed, a success message is displayed, telling the manager that the quantity of the desired item has been increased. The app then quits ![manager morestock2](<https://raw.githubusercontent.com/maxfaneuff/sqlMarket/master/images/manager%20morestock%20(2).png>).
 
 ##### Selecting "Add New Product" allows the manager to add a new product to the store. When selected, the app asks the manager to fill in the item's name, price & quantity. An ID number is automatically generated for the new item. When finished, a success message is displayed, telling the manager that the item has been added to the store. The app then quits ![manager newitem](https://raw.githubusercontent.com/maxfaneuff/sqlMarket/master/images/manager%20newitem.png).
 
