@@ -137,6 +137,7 @@ function updateInventory() {
             );
           }
         );
+        goodbye();
       });
   });
   //where do I put the goodbye function?//
@@ -187,5 +188,6 @@ function createProduct() {
           );
         }
       );
+      goodbye();
     });
 }
